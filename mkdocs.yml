@@ -1,0 +1,8 @@
+site_name: ECCTY Seminar - Herndon
+nav:
+  - Home: index.md
+  - Hands-on Labs:
+      - Lab 1 - Application Modernization: LAB_application_modernization.md
+      - Lab 2 - WebSphere Automation: LAB_websphere_automation.md
+theme: readthedocs
+extra_css: ["extra.css"]
