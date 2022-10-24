@@ -1,1 +1,1 @@
-# IBM Application Platform Technology Workshop - Chicago
+# ECCTY 2022 - Herndon, Virginia
