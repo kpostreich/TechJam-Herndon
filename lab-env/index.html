@@ -64,6 +64,9 @@
     <a class="current" href="./">Accessing lab environments Day 1</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#liberty-lab-fix-for-pomxml-file">Liberty lab fix for pom.xml file</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -130,6 +133,116 @@
 <p><strong>Note: </strong>The lab guides include the information for which VM to open, how to login to the VM, login credentials, etc.  </p>
 </li>
 </ol>
+<h3 id="liberty-lab-fix-for-pomxml-file">Liberty lab fix for pom.xml file</h3>
+<p><strong>Replace the contents of pom.xml file in the following directory, with this new content.</strong></p>
+<p>/home/ibmdemo/Student/labs/devmode/demo-project</p>
+<p>and </p>
+<p>/home/ibmdemo/Student/labs/devmode/guide-getting-started</p>
+<pre><code class="xml">&lt;?xml version='1.0' encoding='utf-8'?&gt;
+  &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;io.openliberty.guides&lt;/groupId&gt;
+    &lt;artifactId&gt;guide-getting-started&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;!-- Liberty configuration --&gt;
+        &lt;liberty.var.default.http.port&gt;9080&lt;/liberty.var.default.http.port&gt;
+        &lt;liberty.var.default.https.port&gt;9443&lt;/liberty.var.default.https.port&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!-- Provided dependencies --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;jakarta.platform&lt;/groupId&gt;
+            &lt;artifactId&gt;jakarta.jakartaee-api&lt;/artifactId&gt;
+            &lt;version&gt;8.0.0&lt;/version&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.eclipse.microprofile&lt;/groupId&gt;
+            &lt;artifactId&gt;microprofile&lt;/artifactId&gt;
+            &lt;version&gt;3.3&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;provided&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;!-- For tests --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+            &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+            &lt;version&gt;5.6.2&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+            &lt;artifactId&gt;cxf-rt-rs-client&lt;/artifactId&gt;
+            &lt;version&gt;3.3.6&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.cxf&lt;/groupId&gt;
+            &lt;artifactId&gt;cxf-rt-rs-extension-providers&lt;/artifactId&gt;
+            &lt;version&gt;3.3.6&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.glassfish&lt;/groupId&gt;
+            &lt;artifactId&gt;javax.json&lt;/artifactId&gt;
+            &lt;version&gt;1.1.4&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;finalName&gt;${project.artifactId}&lt;/finalName&gt;
+        &lt;plugins&gt;
+            &lt;!-- Enable liberty-maven plugin --&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;io.openliberty.tools&lt;/groupId&gt;
+                &lt;artifactId&gt;liberty-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.3.4&lt;/version&gt;
+                 &lt;configuration&gt;
+                    &lt;assemblyArtifact&gt;
+                        &lt;groupId&gt;io.openliberty&lt;/groupId&gt;
+                        &lt;artifactId&gt;openliberty-javaee8&lt;/artifactId&gt;
+                        &lt;version&gt;21.0.0.3&lt;/version&gt;
+                        &lt;type&gt;zip&lt;/type&gt;
+                    &lt;/assemblyArtifact&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.2.3&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.22.2&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;!-- Plugin to run functional tests --&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-failsafe-plugin&lt;/artifactId&gt;
+                &lt;version&gt;2.22.2&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;systemPropertyVariables&gt;
+                        &lt;http.port&gt;${liberty.var.default.http.port}&lt;/http.port&gt;
+                    &lt;/systemPropertyVariables&gt;
+                &lt;/configuration&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
               
             </div>
           </div>
