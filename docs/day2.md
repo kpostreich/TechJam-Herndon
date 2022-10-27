@@ -6,8 +6,10 @@ Time | Session
 
 
 
-MQ Labs: [https://jjodl.github.io/cp4i-pot-public/MQ-labs/](https://jjodl.github.io/cp4i-pot-public/MQ-labs/)
+MQ Labs: 
 
+  - [IBM Integration PoT Labs](https://jjodl.github.io/cp4i-pot-public/MQ-labs/)
+  - [Automate MQ Configuration with Tekton Pipelines](https://ibm-cloudintegration.github.io/messaging-pot/mq_cp4i_pot_lab4.html)
 
 <!--
 

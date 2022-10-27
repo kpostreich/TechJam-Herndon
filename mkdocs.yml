@@ -2,6 +2,7 @@ site_name: ECCTY 2022 - Herndon, Virginia
 nav:
   - Home: index.md
   - Day 1 Labs: day1.md
+  - Accessing lab environments Day 1: lab-env.md
   - Day 2 Labs: day2.md  
-theme: readthedocs
+theme: readthedocs  
 extra_css: ["extra.css"]
